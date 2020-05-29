@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/oleg/CLionProjects/Chat_project/CustomRSA.hpp
+iostream
+-
+random
+-
+
+/home/oleg/CLionProjects/Chat_project/main.cpp
+iostream
+-
+CustomRSA.hpp
+/home/oleg/CLionProjects/Chat_project/CustomRSA.hpp
+
