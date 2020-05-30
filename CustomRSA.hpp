@@ -5,12 +5,19 @@
 
 #include <iostream>
 #include <random>
+#include <math>
+
+struct Key{
+    uint_fast64_t first;
+    uint_fast64_t second;
+};
 
 
 
 class RSA{
 private:
-    uint_fast64_t key;
+    Key _public;
+    Key _private;
 
     bool Is_Primal(uint_fast64_t number){
         bool check = true;
@@ -47,20 +54,63 @@ private:
             }
 
         }
-
-
         return temp;
-
     }
+
+    uint_fast64_t Euclidean_algorithm(uint_fast64_t first, uint_fast64_t second){
+        while (first != second){
+            if (first > second){
+                first -= (second) * (first / second);
+            }
+            else{
+                second -= (first) * (second / first)
+            }
+        }
+        return first;
+    }
+
+    uint_fast64_t Eulers_totient_function(uint_fast64_t number){
+        uint_fast64_t count = 0;
+
+        for (uint_fast64_t i = 1; i < number; i++){
+            if (Euclidean_algorithm(i, number) == 1){
+                count++;
+            }
+        }
+        return count;
+    }
+    uint_fast64_t Eulers_totient_function(uint_fast64_t FirstPrimal, uint_fast64_t SecondPrimal){
+        return (FirstPrimal - 1) * (SecondPrimal - 1);
+    }
+
+    uint_fast64_t Inverse(uint_fast64_t number, uint_fast64_t mod){
+        return pow(number, Eulers_totient_function(mod) - 1);
+    }
+
 public:
     void Key_Generation(){
-        key = this->Big_Random_Primal() * this->Big_Random_Primal();
+        uint_fast64_t a = this->Big_Random_Primal();
+        uint_fast64_t b = this->Big_Random_Primal();
+        uint_fast64_t temp = Big_Random_Primal();
+
+        _private.second = a * b;
+        _public.second = a * b;
+
+        while (Euclidean_algorithm(temp, Eulers_totient_function(a, b) != 1)){
+            temp = Big_Random_Primal()
+        }
+
+        _public.first = temp;
+        _private.first = Inverse(temp, a * b);
     }
-    //Только одну часть сделал.
 
 
 
-    uint_fast64_t GetKey(){
-        return key;
+    Key Get_public_Key(){
+        return _public;
     };
+
+    Key  Get_private_Key(){
+        return _private;
+    }
 };
