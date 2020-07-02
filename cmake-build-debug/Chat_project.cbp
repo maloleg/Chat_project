@@ -85,10 +85,28 @@
 		<Unit filename="/home/oleg/CLionProjects/Chat_project/CustomRSA.hpp">
 			<Option target="Chat_project"/>
 		</Unit>
+		<Unit filename="/home/oleg/CLionProjects/Chat_project/bitset_arithmetic.hpp">
+			<Option target="Chat_project"/>
+		</Unit>
 		<Unit filename="/home/oleg/CLionProjects/Chat_project/cmake-build-debug/Client.hpp">
 			<Option target="Chat_project"/>
 		</Unit>
 		<Unit filename="/home/oleg/CLionProjects/Chat_project/main.cpp">
+			<Option target="Chat_project"/>
+		</Unit>
+		<Unit filename="/home/oleg/CLionProjects/Chat_project/uint128_t.cpp">
+			<Option target="Chat_project"/>
+		</Unit>
+		<Unit filename="/home/oleg/CLionProjects/Chat_project/uint128_t.h">
+			<Option target="Chat_project"/>
+		</Unit>
+		<Unit filename="/home/oleg/CLionProjects/Chat_project/uint256_t.cpp">
+			<Option target="Chat_project"/>
+		</Unit>
+		<Unit filename="/home/oleg/CLionProjects/Chat_project/uint256_t.h">
+			<Option target="Chat_project"/>
+		</Unit>
+		<Unit filename="/home/oleg/CLionProjects/Chat_project/uintT_t.hpp">
 			<Option target="Chat_project"/>
 		</Unit>
 		<Unit filename="/home/oleg/CLionProjects/Chat_project/CMakeLists.txt">

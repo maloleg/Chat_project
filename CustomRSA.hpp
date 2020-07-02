@@ -5,7 +5,8 @@
 
 #include <iostream>
 #include <random>
-#include <math>
+#include <math.h>
+#include "uint256_t.h"
 
 struct Key{
     uint_fast64_t first;
@@ -60,10 +61,10 @@ private:
     uint_fast64_t Euclidean_algorithm(uint_fast64_t first, uint_fast64_t second){
         while (first != second){
             if (first > second){
-                first -= (second) * (first / second);
+                first -= (second);
             }
             else{
-                second -= (first) * (second / first)
+                second -= (first);
             }
         }
         return first;
@@ -83,8 +84,16 @@ private:
         return (FirstPrimal - 1) * (SecondPrimal - 1);
     }
 
-    uint_fast64_t Inverse(uint_fast64_t number, uint_fast64_t mod){
-        return pow(number, Eulers_totient_function(mod) - 1);
+    uint256_t Inverse(uint_fast64_t number, uint_fast64_t mod){ //Написал полную дичь, надо переписать.
+        uint256_t temp = 1;
+
+        for (uint_fast64_t i = 0; i < (Eulers_totient_function(mod) - 1); i++){
+            temp *= number;
+           // std::cout << temp <<std::endl;
+        }
+        return temp;
+
+        //std::cout << temp << " " << Eulers_totient_function(mod) - 1 << " " << pow(number, (Eulers_totient_function(mod) - 1));
     }
 
 public:
@@ -96,12 +105,18 @@ public:
         _private.second = a * b;
         _public.second = a * b;
 
-        while (Euclidean_algorithm(temp, Eulers_totient_function(a, b) != 1)){
-            temp = Big_Random_Primal()
-        }
+//        while (Euclidean_algorithm(temp, Eulers_totient_function(a, b) != 1)){
+//            temp = Big_Random_Primal();
+//        }
 
         _public.first = temp;
-        _private.first = Inverse(temp, a * b);
+        //_private.first = Inverse(temp, a * b);
+    }
+
+    void Test(){
+        std::cout << Eulers_totient_function(52) << std::endl;
+        std::cout << pow(123, Eulers_totient_function(52) - 1) << std::endl;
+        std::cout << this->Inverse(123234234343423423, 52342);
     }
 
 

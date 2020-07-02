@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Chat_project.dir/main.cpp.o"
+  "CMakeFiles/Chat_project.dir/uint128_t.cpp.o"
+  "CMakeFiles/Chat_project.dir/uint256_t.cpp.o"
   "Chat_project"
   "Chat_project.pdb"
 )

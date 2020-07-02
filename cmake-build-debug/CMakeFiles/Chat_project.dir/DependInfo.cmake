@@ -5,6 +5,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/oleg/CLionProjects/Chat_project/main.cpp" "/home/oleg/CLionProjects/Chat_project/cmake-build-debug/CMakeFiles/Chat_project.dir/main.cpp.o"
+  "/home/oleg/CLionProjects/Chat_project/uint128_t.cpp" "/home/oleg/CLionProjects/Chat_project/cmake-build-debug/CMakeFiles/Chat_project.dir/uint128_t.cpp.o"
+  "/home/oleg/CLionProjects/Chat_project/uint256_t.cpp" "/home/oleg/CLionProjects/Chat_project/cmake-build-debug/CMakeFiles/Chat_project.dir/uint256_t.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
