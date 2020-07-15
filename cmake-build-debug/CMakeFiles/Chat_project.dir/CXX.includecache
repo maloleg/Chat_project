@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/oleg/CLionProjects/Chat_project/CustomRSA.hpp
+C:/Users/malol/Documents/GitHub/Chat_project/CustomRSA.hpp
 iostream
 -
 random
@@ -14,23 +14,23 @@ random
 math.h
 -
 uint256_t.h
-/home/oleg/CLionProjects/Chat_project/uint256_t.h
+C:/Users/malol/Documents/GitHub/Chat_project/uint256_t.h
 
-/home/oleg/CLionProjects/Chat_project/main.cpp
+C:/Users/malol/Documents/GitHub/Chat_project/main.cpp
 iostream
 -
 CustomRSA.hpp
-/home/oleg/CLionProjects/Chat_project/CustomRSA.hpp
+C:/Users/malol/Documents/GitHub/Chat_project/CustomRSA.hpp
 uintT_t.hpp
-/home/oleg/CLionProjects/Chat_project/uintT_t.hpp
+C:/Users/malol/Documents/GitHub/Chat_project/uintT_t.hpp
 
-/home/oleg/CLionProjects/Chat_project/uint128_t.h
+C:/Users/malol/Documents/GitHub/Chat_project/uint128_t.h
 uint256_t_config.include
-/home/oleg/CLionProjects/Chat_project/uint256_t_config.include
+C:/Users/malol/Documents/GitHub/Chat_project/uint256_t_config.include
 uint128_t.include
-/home/oleg/CLionProjects/Chat_project/uint128_t.include
+C:/Users/malol/Documents/GitHub/Chat_project/uint128_t.include
 
-/home/oleg/CLionProjects/Chat_project/uint128_t.include
+C:/Users/malol/Documents/GitHub/Chat_project/uint128_t.include
 cstdint
 -
 ostream
@@ -46,15 +46,15 @@ utility
 vector
 -
 
-/home/oleg/CLionProjects/Chat_project/uint256_t.h
+C:/Users/malol/Documents/GitHub/Chat_project/uint256_t.h
 uint256_t_config.include
-/home/oleg/CLionProjects/Chat_project/uint256_t_config.include
+C:/Users/malol/Documents/GitHub/Chat_project/uint256_t_config.include
 uint128_t.h
-/home/oleg/CLionProjects/Chat_project/uint128_t.h
+C:/Users/malol/Documents/GitHub/Chat_project/uint128_t.h
 uint256_t.include
-/home/oleg/CLionProjects/Chat_project/uint256_t.include
+C:/Users/malol/Documents/GitHub/Chat_project/uint256_t.include
 
-/home/oleg/CLionProjects/Chat_project/uint256_t.include
+C:/Users/malol/Documents/GitHub/Chat_project/uint256_t.include
 cstdint
 -
 ostream
@@ -66,11 +66,11 @@ type_traits
 utility
 -
 
-/home/oleg/CLionProjects/Chat_project/uint256_t_config.include
+C:/Users/malol/Documents/GitHub/Chat_project/uint256_t_config.include
 
-/home/oleg/CLionProjects/Chat_project/uintT_t.hpp
+C:/Users/malol/Documents/GitHub/Chat_project/uintT_t.hpp
 iostream
-/home/oleg/CLionProjects/Chat_project/iostream
+C:/Users/malol/Documents/GitHub/Chat_project/iostream
 bitset
 -
 string

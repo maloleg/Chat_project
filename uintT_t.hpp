@@ -19,6 +19,10 @@ public:
         this->num = temp;
     }
 
+    uintT_t(std::bitset<T> arg){
+        this->num = arg;
+    }
+
     uintT_t(std::string str){
         this->num = 0;
         for (const auto& i : str){
@@ -47,15 +51,26 @@ public:
     }
 
     uintT_t& operator-=(std::bitset<T> rhs){
-        uint64_t temp = 0;
-        std::bitset<T> x(0);
-        for (uint_fast64_t i = 0; i < T; i++){
-            //std::cout << first[i] << " " << second[i] << " " << temp << std::endl;
-            x[i] = (num[i] - rhs[i] - temp)%2;
-            if (!num[i] && rhs[i]) temp = (num[i] - rhs[i] + temp)/2;
-            if (num[i] && !rhs[i]) temp /= 2;
-        }
-        this->num = x;
+        rhs.flip();
+        uintT_t<T> temp(rhs);
+        std::bitset<T> x(1);
+        //std::cout << rhs << "!\n";
+        //x = 0;
+
+        //std::cout << x << "!\n";
+
+        temp += x;
+        //std::cout << rhs << "!\n";
+        *this += rhs;
+        *this += x;
+
+//        for (uint_fast64_t i = 0; i < T; i++){
+//            //std::cout << first[i] << " " << second[i] << " " << temp << std::endl;
+//            x[i] = (num[i] - rhs[i] - temp)%2;
+//            if (!num[i] && rhs[i]) temp = (num[i] - rhs[i] + temp)/2;
+//            if (num[i] && !rhs[i]) temp /= 2;
+//        }
+//        this->num = x;
         return *this;
     }
 
@@ -146,7 +161,43 @@ public:
         return num != rhs.num;
     }
 
-    uintT_t& operator*=(uint_fast64_t x){
+    uintT_t& operator*=(uintT_t rhs){         //not terrible, not good, but not terrible
+        uintT_t<T> temp(0);
+
+        if (num.count() > rhs.num.count()){
+            for (uint_fast64_t i = 0; i < T; i++){
+                if (rhs.num[i]){
+                    temp += num << i;
+                }
+            }
+        }
+        else{
+            for (uint_fast64_t i = 0; i < T; i++){
+                if (num[i]){
+                    temp += rhs.num << i;
+                }
+            }
+        }
+        *this = temp;
+
+        return *this;
+    }
+
+    uintT_t& operator*(uintT_t rhs){
+        uintT_t<T> temp(num);
+        temp*=rhs;
+
+        *this = temp;
+
+        return *this;
+    }
+
+    uintT_t& operator /= (uintT_t rhs){
+
+    }
+
+
+    uintT_t& operator*=(uint_fast64_t x){        //slow af
         std::bitset<T> temp = this->Get();
         for (uint_fast64_t i = 1; i < x; i++){
             *this += temp;
@@ -160,6 +211,8 @@ public:
         *this = temp;
         return *this;
     }
+
+
 
     friend std::ostream& operator<<(std::ostream& lhs, uintT_t& rhs){
         lhs << rhs.Get();

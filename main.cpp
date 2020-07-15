@@ -16,7 +16,7 @@ std::bitset<T> Add(std::bitset<T> first, std::bitset<T> second){
 }
 
 int main() {
-    const uint64_t uint_size = 20;
+    const uint64_t uint_size = 500;
 //    RSA key1;
 //    key1.Key_Generation();
 //    std::cout << key1.Get_private_Key().first;
@@ -25,15 +25,24 @@ int main() {
     uintT_t<uint_size> y(524542489288468442);
     uintT_t<uint_size> z;
 
-    x = "360";
-    y = "259";
-    z = "259";
+    x = "12461461461466465";
+    y = "12461461461466465";
+    //y = "36046347357435735734563463473473453456435734763463473453563473573573246435783462463247";
+    z = "429496729600000000";
 
-    std::cout << x << std::endl << y << std::endl << "------------------------------------------" << std::endl;
+    //std::cout << x << std::endl << y << std::endl << "------------------------------------------" << std::endl;
 
-    x -= y;
+    //x -= y;
 
-    std::cout << x;
+    std::cout << x << std::endl;
+
+    //x*= 8134135361346646;
+
+    //std::cout << x << "\n\n";
+
+    y*= z;
+
+    std::cout << y;
 
     //std::cout << (x <= y) << std::endl << (x >= y);
 
