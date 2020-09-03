@@ -132,25 +132,11 @@ public:
     }
 
     bool operator>=(uintT_t rhs){
-        bool check = true;
-
-        for (uint64_t i = T - 1; i >= 0; i--){
-            //std::cout << "i =" << i << " ; " << num[i] << " " << rhs.num[i] << std::endl;
-            if (num[i] > rhs.num[i]){
-                check = true;
-                break;
-            }
-            else if (num[i] < rhs.num[i]){
-                break;
-            }
-            if (i == 0) break;
-        }
-
-        return check;
+        return (rhs < *this || rhs == *this);
     }
 
     bool operator<=(uintT_t rhs){
-        return (rhs > *this && rhs == *this);
+        return (rhs > *this || rhs == *this);
     }
 
     bool operator==(uintT_t rhs){
@@ -192,18 +178,97 @@ public:
         return *this;
     }
 
-    uintT_t& operator /= (uintT_t rhs){
+    uintT_t& operator-(uintT_t rhs){
+        uintT_t<T> temp(num);
+        temp-=rhs;
 
-    }
+        *this = temp;
 
-
-    uintT_t& operator*=(uint_fast64_t x){        //slow af
-        std::bitset<T> temp = this->Get();
-        for (uint_fast64_t i = 1; i < x; i++){
-            *this += temp;
-        }
         return *this;
     }
+
+    uintT_t& operator/(uintT_t rhs){
+        uintT_t<T> temp(num);
+        temp/=rhs;
+
+        *this = temp;
+
+        return *this;
+    }
+
+
+
+    uint_fast64_t First_bit() {
+        uint_fast64_t check = 0;
+        if (num.count() != 0){
+            for (uint_fast64_t i = T - 1; i >= 0; i--) {
+                if (num[i]) {
+                    check = i;
+                    break;
+                }
+               // std::cout << i << std::endl;
+            }
+        return check + 1;
+    }
+        else{
+            return 0;
+        }
+
+    }
+
+    uintT_t& operator /= (uintT_t rhs){
+        uintT_t<T> result(0);
+        uintT_t<T> temp(*this);
+        uintT_t<T> current(rhs);
+        uint_fast64_t i;
+
+        while (temp >= rhs){
+
+            i = 0;
+            current = rhs;
+            while (current <= temp && current.First_bit() != temp.First_bit()){
+                current.num <<= 1;
+                i++;
+            }
+            std::cout << "result=      " << result << "\ntemp=    " << temp << "\ncurrent= " << current << std::endl;
+
+            if (current <= temp){
+                temp -= current;
+                result.num[i] = 1;
+            }
+            else if (i > 0){
+                current.num >>= 1;
+                i--;
+                temp -= current;
+                result.num[i] = 1;
+            }
+        }
+        this->num = result.num;
+        return *this;
+    }
+
+    uintT_t& operator %=(uintT_t rhs){
+//        return (*this / rhs);
+        uintT_t temp(*this);
+        temp /= rhs;
+        temp *= rhs;
+        *this -= temp;
+//        this->num = temp.num;
+        return *this;
+        std::cout << *this /rhs << std::endl;
+        std::cout << rhs*(*this /rhs) << std::endl;
+        std::cout << *this << std::endl;
+        return (*this - rhs*(*this /rhs));
+    }
+
+
+//    uintT_t& operator*=(uint_fast64_t x){        //slow af
+//        std::bitset<T> temp = this->Get();
+//        for (uint_fast64_t i = 1; i < x; i++){
+//            *this += temp;
+//        }
+//        return *this;
+//    }
 
     uintT_t& operator= (const char* rhs){
         std::string buffer(rhs);
@@ -218,7 +283,8 @@ public:
         lhs << rhs.Get();
         return lhs;
     }
-
 };
+
+
 
 
