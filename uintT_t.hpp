@@ -25,9 +25,11 @@ public:
 
     uintT_t(std::string str){
         this->num = 0;
+//        std::cout << str << std::endl;
         for (const auto& i : str){
             *this *= 10;
             *this += i - '0';
+//            std::cout << *this << "   " << i << std::endl;
         }
     }
 
@@ -230,7 +232,7 @@ public:
                 current.num <<= 1;
                 i++;
             }
-            std::cout << "result=      " << result << "\ntemp=    " << temp << "\ncurrent= " << current << std::endl;
+//            std::cout << "result=      " << result << "\ntemp=    " << temp << "\ncurrent= " << current << std::endl;
 
             if (current <= temp){
                 temp -= current;
@@ -245,6 +247,32 @@ public:
         }
         this->num = result.num;
         return *this;
+    }
+
+    uintT_t& operator % (uintT_t rhs){
+        uintT_t temp(*this);
+        temp %= rhs;
+        return temp;
+    }
+
+    uint_fast64_t ToUint(){
+        uint_fast64_t temp = 0;
+        for (uint_fast64_t i = T-1; i >= 0; --i){
+            temp += num[i] * pow(2, i);
+//            std::cout << i << std::endl;
+            if (i == 0) break;
+        }
+        return temp;
+    }
+
+    uint_fast64_t operator% (uint_fast64_t rhs){
+        uintT_t temp(*this);
+        uint_fast64_t numb = 0;
+        uintT_t temp2(rhs);
+        temp %= temp2;
+        numb = temp.ToUint();
+//        std::cout << "!1123";
+        return numb;
     }
 
     uintT_t& operator %=(uintT_t rhs){
@@ -282,6 +310,24 @@ public:
     friend std::ostream& operator<<(std::ostream& lhs, uintT_t& rhs){
         lhs << rhs.Get();
         return lhs;
+    }
+
+    std::string ToString(){
+        std::string temp = "";
+        char digit [1] = {};
+        uintT_t<T> tempNumb(*this);
+        uint_fast64_t un =  tempNumb%10;
+        while (tempNumb > 0){
+//            digit;
+//            std::cout << digit;
+            un = tempNumb%10;
+//            std::cout << tempNumb << std::endl;
+            itoa(un, digit, 10);
+//            std::cout << digit << std::endl;
+            temp = digit + temp;
+            tempNumb /= 10;
+        }
+        return temp;
     }
 };
 
