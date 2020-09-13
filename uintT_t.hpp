@@ -5,6 +5,96 @@
 #include <string>
 
 template <uint64_t T>
+class uintT_t;
+
+template <uint64_t T>
+uintT_t<T> operator + (uintT_t<T> lhs, uintT_t<T> rhs){
+    lhs += rhs;
+    return lhs;
+}
+
+template <uint64_t T>
+uintT_t<T> operator / (const uintT_t<T>& lhs, const uintT_t<T>& rhs){
+    lhs /= rhs;
+    return rhs;
+}
+
+template <uint64_t T>
+uintT_t<T> operator - (const uintT_t<T>& lhs, const uintT_t<T>& rhs){
+    lhs -= rhs;
+    return lhs;
+}
+
+template <uint64_t T>
+uintT_t<T> operator * (uintT_t<T>& lhs, uintT_t<T>& rhs){
+    lhs *= rhs;
+    return lhs;
+}
+
+template<uint64_t T>
+bool operator>(const uintT_t<T> lhs, const uintT_t<T> rhs){
+    bool check = false;
+
+    for (uint64_t i = T - 1; i >= 0; i--){
+        //std::cout << "i =" << i << " ; " << num[i] << " " << rhs.num[i] << std::endl;
+        if (lhs.num[i] > rhs.num[i]){
+            check = true;
+            break;
+        }
+        else if (lhs.num[i] < rhs.num[i]){
+            break;
+        }
+        if (i == 0) break;
+    }
+    return check;
+}
+
+template <uint64_t T>
+bool operator < (const uintT_t<T> lhs, uint64_t){
+    uintT_t<T> temp(uint64_t);
+
+    return lhs < temp;
+}
+
+template <uint64_t T>
+bool operator > (const uintT_t<T> lhs, const uint64_t){
+    uintT_t<T> temp(uint64_t);
+
+    return lhs > temp;
+}
+
+template <uint64_t T>
+bool operator <(const uintT_t<T> lhs, const uintT_t<T> rhs){
+    return (rhs > lhs);
+}
+
+template <uint64_t T>
+bool operator >=(const uintT_t<T> lhs, const uintT_t<T> rhs){
+    return (rhs < lhs || rhs == lhs);
+}
+
+template <uint64_t T>
+bool operator<=(const uintT_t<T> lhs, const uintT_t<T> rhs){
+    return (rhs > lhs || rhs == lhs);
+}
+
+template <uint64_t T>
+bool operator==(const uintT_t<T> lhs, const uintT_t<T> rhs){
+    return lhs.num == rhs.num;
+}
+
+template <uint64_t T>
+bool operator!=(const uintT_t<T> lhs, const uintT_t<T> rhs){
+    return lhs.num != rhs.num;
+}
+
+template <uint64_t T>
+uintT_t<T> operator % (const uintT_t<T>& lhs, const uintT_t<T>& rhs){
+    lhs %= rhs;
+    return rhs;
+}
+
+template <uint64_t T>
 class uintT_t{
 private:
     std::bitset<T> num;
@@ -91,13 +181,10 @@ public:
         return *this;
     }
 
-    uintT_t operator+(uintT_t rhs){
-        uintT_t<T> temp;
-        temp+=num;
-        temp+=rhs;
-
-        return temp;
-    }
+//    uintT_t& operator+(uintT_t rhs){
+//        *this += rhs.num;
+//        return *this;
+//    }
 
     uintT_t& operator+=(uint64_t rhs){
         std::bitset<T> temp(rhs);
@@ -111,45 +198,19 @@ public:
 //
 //    }
 
-    bool operator>(uintT_t rhs){
-        bool check = false;
+    friend bool operator> <T>(const uintT_t lhs, const uintT_t rhs);
 
-        for (uint64_t i = T - 1; i >= 0; i--){
-            //std::cout << "i =" << i << " ; " << num[i] << " " << rhs.num[i] << std::endl;
-            if (num[i] > rhs.num[i]){
-                check = true;
-                break;
-            }
-            else if (num[i] < rhs.num[i]){
-                break;
-            }
-            if (i == 0) break;
-        }
+    friend bool operator< <T>(const uintT_t lhs, const uintT_t rhs);
 
-        return check;
-    }
+    friend bool operator>= <T>(const uintT_t lhs, const uintT_t rhs);
 
-    bool operator<(uintT_t rhs){
-        return (rhs > *this);
-    }
+    friend bool operator<=<T>(const uintT_t lhs, const uintT_t rhs);
 
-    bool operator>=(uintT_t rhs){
-        return (rhs < *this || rhs == *this);
-    }
+    friend bool operator==<T>(const uintT_t lhs, const uintT_t rhs);
 
-    bool operator<=(uintT_t rhs){
-        return (rhs > *this || rhs == *this);
-    }
+    friend bool operator!=<T>(const uintT_t lhs, const uintT_t rhs);
 
-    bool operator==(uintT_t rhs){
-        return num == rhs.num;
-    }
-
-    bool operator!=(uintT_t rhs){
-        return num != rhs.num;
-    }
-
-    uintT_t& operator*=(uintT_t rhs){         //not terrible, not good, but not terrible
+    uintT_t& operator*=(const uintT_t rhs){         //not terrible, not good, but not terrible
         uintT_t<T> temp(0);
 
         if (num.count() > rhs.num.count()){
@@ -171,14 +232,19 @@ public:
         return *this;
     }
 
-    uintT_t& operator*(uintT_t rhs){
-        uintT_t<T> temp(num);
-        temp*=rhs;
+//    uintT_t& operator*(uintT_t rhs){
+//        uintT_t<T> temp(num);
+//
+//        temp*=rhs;
+//wd
+//        return temp;
+//    }
 
-        *this = temp;
-
-        return *this;
-    }
+//    friend uintT_t<T> operator + (uintT_t<T> lhs, uintT_t<T> rhs);
+//    friend uintT_t<T> operator / (uintT_t<T> lhs, uintT_t<T> rhs);
+//    friend uintT_t<T> operator - (uintT_t<T> lhs, uintT_t<T> rhs);
+//    friend uintT_t<T> operator * (uintT_t<T> lhs, uintT_t<T> rhs);
+//    friend uintT_t<T> operator % (uintT_t<T> lhs, uintT_t<T> rhs);
 
     uintT_t& operator-(uintT_t rhs){
         uintT_t<T> temp(num);
@@ -222,16 +288,31 @@ public:
         uintT_t<T> result(0);
         uintT_t<T> temp(*this);
         uintT_t<T> current(rhs);
+        uintT_t<T> cond(rhs);
         uint_fast64_t i;
 
-        while (temp >= rhs){
-
+        std::cout << "!@# " << rhs << std::endl;
+        cond = rhs * result;
+//        std::cout << rhs * result + rhs << "   " << rhs << std::endl;
+//        std::cout << rhs * result + rhs;
+        std::cout << "!@# " << rhs << std::endl;
+        while ((rhs * result + rhs) <= rhs){
             i = 0;
             current = rhs;
-            while (current <= temp && current.First_bit() != temp.First_bit()){
+            std::cout << "!!" << current << " @ " << rhs <<  std::endl;
+            std::cout << current << " | " << temp << std::endl;
+            while (current.First_bit() != temp.First_bit()){
                 current.num <<= 1;
                 i++;
+//                std::cout << current << " | " << temp << std::endl;
             }
+
+            if (current > temp){
+                current.num >>= 1;
+                i--;
+            }
+            std::cout << "temp:" << temp << std::endl << "curr:" << current;
+
 //            std::cout << "result=      " << result << "\ntemp=    " << temp << "\ncurrent= " << current << std::endl;
 
             if (current <= temp){
@@ -244,7 +325,11 @@ public:
                 temp -= current;
                 result.num[i] = 1;
             }
+//            std::cout << rhs * result + rhs << "   " << rhs << std::endl;
+
+            std::cout << "   " << result << std::endl;
         }
+//        std::cout << "/=" << result.Get() << std::endl;
         this->num = result.num;
         return *this;
     }
@@ -313,20 +398,28 @@ public:
     }
 
     std::string ToString(){
-        std::string temp = "";
-        char digit [1] = {};
+        std::string temp("");
+        char digit[1] = {};
         uintT_t<T> tempNumb(*this);
         uint_fast64_t un =  tempNumb%10;
         while (tempNumb > 0){
 //            digit;
-//            std::cout << digit;
+//            std::cout << tempNumb << "@\n";
             un = tempNumb%10;
+
+//            std::cout << "@\n";
 //            std::cout << tempNumb << std::endl;
+//            std::cout << un << "!";
             itoa(un, digit, 10);
-//            std::cout << digit << std::endl;
+//            digit = char((uint_fast8_t)'0' + (uint_fast8_t) un);
+//            std::cout << temp << "!";
             temp = digit + temp;
+//            std::cout << "@\n";
             tempNumb /= 10;
+//            std::cout << "@\n";
+
         }
+//        std::cout << std::endl;
         return temp;
     }
 };

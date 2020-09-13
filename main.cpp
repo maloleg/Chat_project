@@ -16,20 +16,20 @@ std::bitset<T> Add(std::bitset<T> first, std::bitset<T> second){
 }
 
 int main() {
-    const uint64_t uint_size = 400;
+    const uint64_t uint_size = 20;
 //    RSA key1;
 //    key1.Key_Generation();
 //    std::cout << key1.Get_private_Key().first;
 //    key1.Test();
     uintT_t<uint_size> x("12");
-    uintT_t<uint_size> y("9999999");
+    uintT_t<uint_size> y;
     uintT_t<uint_size> z;
 
     x = "1234";
 //    y = "9999999";
     std::cout << "!" << y << std::endl;
-    y = "23263247684621384351437278627834378827178462684621384384371873513724173837946517934793517113879453358355435346346";
-    z = "118";
+    y = "4";
+    z = "2";
     //std::cout << x << std::endl << y << std::endl << "------------------------------------------" << std::endl;
 
     //x -= y;
@@ -51,8 +51,16 @@ int main() {
 
     uint_fast64_t g = 55;
 
-    std::cout << std::endl << y.ToString();
-
+//    for (uint_fast64_t i = 0; i < 1000; i++) {
+//
+//        std::cout << std::endl << y.ToString();
+//        y *= z;
+//    }
+    y = "1024";
+    z = "10";
+//    y %= z;
+    y /= z;
+    std::cout << y.ToString();
     //std::cout << (x <= y) << std::endl << (x >= y);
 
     //std::cout << (x > y) << " " << (x >= y) << " " << (x <= y) << " " << (x == y) << " " << (x != y) << " " << (x >= z) << " " << (y <= z)
